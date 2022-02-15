@@ -269,7 +269,7 @@ std::string HTTPSEverywhereService::ApplyHTTPSRule(
     return "";
   }
 
-  base::Value::ConstListView topValues = json_object->GetList();
+  base::Value::ConstListView topValues = json_object->GetListDeprecated();
   for (auto it = topValues.cbegin(); it != topValues.cend(); ++it) {
     if (!it->is_dict()) {
       continue;
@@ -285,13 +285,13 @@ std::string HTTPSEverywhereService::ApplyHTTPSRule(
       const base::ListValue* eValues = nullptr;
       exclusion->GetAsList(&eValues);
       if (nullptr != eValues) {
-        for (size_t j = 0; j < eValues->GetList().size(); ++j) {
-          const base::Value* pValue = nullptr;
-          if (!eValues->Get(j, &pValue)) {
+        for (size_t j = 0; j < eValues->GetListDeprecated().size(); ++j) {
+          const auto& list = eValues->GetListDeprecated();
+          if (list.size() <= j) {
             continue;
           }
           const base::DictionaryValue* pDictionary = nullptr;
-          pValue->GetAsDictionary(&pDictionary);
+          list[j].GetAsDictionary(&pDictionary);
           if (nullptr == pDictionary) {
             continue;
           }
@@ -321,13 +321,13 @@ std::string HTTPSEverywhereService::ApplyHTTPSRule(
       return "";
     }
 
-    for (size_t j = 0; j < rValues->GetList().size(); ++j) {
-      const base::Value* pValue = nullptr;
-      if (!rValues->Get(j, &pValue)) {
+    for (size_t j = 0; j < rValues->GetListDeprecated().size(); ++j) {
+      const auto& list = rValues->GetListDeprecated();
+      if (list.size() <= j) {
         continue;
       }
       const base::DictionaryValue* pDictionary = nullptr;
-      pValue->GetAsDictionary(&pDictionary);
+      list[j].GetAsDictionary(&pDictionary);
       if (nullptr == pDictionary) {
         continue;
       }

@@ -299,7 +299,7 @@ std::string eth_newFilter(const std::string& from_block_quantity_tag,
   AddKeyIfNotEmpty(&filter_options, "address", address);
   AddKeyIfNotEmpty(&filter_options, "fromBlock", from_block_quantity_tag);
   AddKeyIfNotEmpty(&filter_options, "toBlock", to_block_quantity_tag);
-  if (!topics->GetList().empty()) {
+  if (!topics->GetListDeprecated().empty()) {
     filter_options.SetKey("topics", std::move(*topics));
   }
   params.Append(std::move(filter_options));
@@ -337,7 +337,7 @@ std::string eth_getLogs(const std::string& from_block_quantity_tag,
   AddKeyIfNotEmpty(&filter_options, "address", address);
   AddKeyIfNotEmpty(&filter_options, "fromBlock", from_block_quantity_tag);
   AddKeyIfNotEmpty(&filter_options, "toBlock", to_block_quantity_tag);
-  if (!topics->GetList().empty()) {
+  if (!topics->GetListDeprecated().empty()) {
     filter_options.SetKey("topics", std::move(*topics));
   }
   AddKeyIfNotEmpty(&filter_options, "blockhash", block_hash);
