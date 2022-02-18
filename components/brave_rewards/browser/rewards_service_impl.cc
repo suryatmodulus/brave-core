@@ -1713,6 +1713,9 @@ bool RewardsServiceImpl::ShouldShowOnboarding() const {
 void RewardsServiceImpl::EnableRewards() {
   StartProcess(base::BindOnce(
       &RewardsServiceImpl::OnStartProcessForEnableRewards, AsWeakPtr()));
+
+  vg_spend_status_timer_.Start(FROM_HERE, base::Seconds(15), this,
+                               &RewardsServiceImpl::BackUpVGSpendStatuses);
 }
 
 void RewardsServiceImpl::OnStartProcessForEnableRewards() {
@@ -3564,14 +3567,17 @@ void RewardsServiceImpl::SetExternalWalletType(const std::string& wallet_type) {
   }
 }
 
-//void RewardsServiceImpl::AddPair() {
-//  std::string value(8, 0);
-//  for (auto& c : value) {
-//    c = base::RandInt('a', 'z');
-//  }
-//
-//  pair_sync_service_->AddPair(clock_->Now().since_origin().InMicroseconds(),
-//                              std::move(value));
-//}
+void RewardsServiceImpl::BackUpVGSpendStatuses() {
+  if (Connected()) {
+    bat_ledger_->BackUpVGSpendStatuses(base::BindOnce(
+        &RewardsServiceImpl::OnBackUpVGSpendStatuses, AsWeakPtr()));
+  }
+}
+
+void RewardsServiceImpl::OnBackUpVGSpendStatuses(
+    ledger::type::Result result,
+    std::vector<ledger::type::VirtualGrantSpendStatusPtr> vg_spend_statuses) {
+  VLOG(0) << "OnBackUpVGSpendStatuses";
+}
 
 }  // namespace brave_rewards
