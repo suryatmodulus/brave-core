@@ -9,8 +9,10 @@
 #include <memory>
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "base/scoped_observation.h"
 #include "brave/components/sidebar/sidebar_service.h"
+#include "ui/base/window_open_disposition.h"
 
 class BraveBrowser;
 class GURL;
@@ -37,7 +39,10 @@ class SidebarController : public SidebarService::Observer {
   SidebarController(const SidebarController&) = delete;
   SidebarController& operator=(const SidebarController&) = delete;
 
-  void ActivateItemAt(int index);
+  // |open_position| is only valid for shortcut type.
+  void ActivateItemAt(
+      int index,
+      WindowOpenDisposition position = WindowOpenDisposition::UNKNOWN);
   void AddItemWithCurrentTab();
   // If current browser doesn't have a tab for |url|, active tab will load
   // |url|. Otherwise, existing tab will be activated.
@@ -66,9 +71,9 @@ class SidebarController : public SidebarService::Observer {
   // Otherwise, load URL in the active tab.
   void IterateOrLoadAtActiveTab(const GURL& url);
 
-  BraveBrowser* browser_ = nullptr;
+  raw_ptr<BraveBrowser> browser_ = nullptr;
   // Interface to view.
-  Sidebar* sidebar_ = nullptr;
+  raw_ptr<Sidebar> sidebar_ = nullptr;
 
   std::unique_ptr<SidebarModel> sidebar_model_;
   base::ScopedObservation<SidebarService, SidebarService::Observer>
