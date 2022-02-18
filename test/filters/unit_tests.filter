@@ -1,3 +1,4 @@
+
 -AboutFlagsHistogramTest.*
 -AboutFlagsTest.*
 -AccessibilityCheckerTest.*
@@ -8,7 +9,7 @@
 -ActivityLogTest.*
 -ActivityLogTestWithoutSwitch.*
 -All/ActionTrackerTest.*
--All/ChromeLabsFeatureTest.*
+-All/ChromeLabs*Test.*
 -All/ExtensionActionAPIUnitTest.*
 -All/MultipleRulesetsTest_Unpacked.*
 -All/MultipleRulesetsTest.*
@@ -63,10 +64,7 @@
 -ChromeCustomizeThemesHandlerTest.*
 -ChromeDownloadManagerDelegateTest.*
 -ChromeEnterpriseRealTimeUrlLookupServiceTest.*
--ChromeLabsBubbleTest.*
--ChromeLabsButtonNoExperimentsAvailableTest.*
--ChromeLabsButtonOnlyExpiredFeaturesAvailableTest.*
--ChromeLabsButtonTest.*
+-ChromeLabs*Test.*
 -ChromeLocationBarModelDelegateTest.*
 -ChromeMetricsServicesManagerClientTest.*
 -ChromeOmniboxNavigationObserverTest.*
@@ -142,6 +140,7 @@
 -ExtensionsMenuViewUnitTest.*
 -ExtensionSourcePriorityTest.*
 -ExtensionsTabbedMenuViewUnitTest.*
+-ExtensionsToolbarContainerUnitTest.*
 -ExtensionsToolbarControlsTest.*
 -ExtensionsToolbarControlsUnitTest.*
 -ExtensionSyncTypeTest.*
@@ -153,6 +152,7 @@
 -ExternalProviderImplTest.*
 -FeaturePromoBubbleViewTest.*
 -FeaturePromoControllerViewsTest.*
+-FirstPartySetsComponentInstallerFeatureEnabledTest.*
 -FirstPartySetsComponentInstallerTest.*
 -FlocComponentInstallerTest.*
 -FlocEventLoggerUnitTest.*
@@ -195,6 +195,7 @@
 -MetricsWebContentsObserverTest.*
 -MoveToAccountStoreBubbleControllerTest.*
 -MultiProfileCredentialsFilterTest.*
+-NewTabPageHandlerTest.*
 -NotificationPermissionContextTest.*
 -OfferNotificationBubbleControllerImplPrerenderTest.*
 -OfferNotificationBubbleControllerImplTest.*
