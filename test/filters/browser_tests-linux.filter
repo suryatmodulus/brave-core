@@ -10,6 +10,7 @@
 -LayoutInstabilityTest.*
 -NewTabUIBrowserTest.*
 -NewTabUIProcessPerTabTest.*
+-OzonePlatformTest.*
 -PolicyTestPrefetchProxyBrowserTest.*
 -PPAPINaClPNaClNonSfiTest.*
 -PrefetchProxyBrowserTest.*
