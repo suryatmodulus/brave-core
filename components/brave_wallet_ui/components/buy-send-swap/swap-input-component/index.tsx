@@ -39,7 +39,9 @@ import {
   SlippageInput,
   WarningText,
   AddressConfirmationText,
-  ButtonLeftSide
+  ButtonLeftSide,
+  LearnMoreButton,
+  WarningRow
 } from './style'
 
 import { BubbleContainer } from '../shared-styles'
@@ -230,6 +232,10 @@ function SwapInputComponent (props: Props) {
       .format(6, true)
     : ''
 
+  const onClickLearnMore = () => {
+    window.open('https://support.brave.com/hc/en-us/articles/4441999049101', '_blank')
+  }
+
   return (
     <BubbleContainer>
       {componentType !== 'selector' &&
@@ -372,13 +378,23 @@ function SwapInputComponent (props: Props) {
         <WarningText>{getLocale('braveWalletSlippageToleranceWarning')}</WarningText>
       }
       {componentType === 'toAddress' && addressError &&
-        <WarningText>{addressError}</WarningText>
+        <WarningRow>
+          <WarningText>{addressError}</WarningText>
+          {addressError === getLocale('braveWalletNotValidChecksumAddressError') &&
+            <LearnMoreButton onClick={onClickLearnMore}>
+              {getLocale('braveWalletAllowAddNetworkLearnMoreButton')}
+            </LearnMoreButton>
+          }
+        </WarningRow>
       }
-
       {componentType === 'toAddress' && addressWarning &&
-        <WarningText>{addressWarning}</WarningText>
+        <WarningRow>
+          <WarningText isWarning={true}>{addressWarning}</WarningText>
+          <LearnMoreButton onClick={onClickLearnMore}>
+            {getLocale('braveWalletAllowAddNetworkLearnMoreButton')}
+          </LearnMoreButton>
+        </WarningRow>
       }
-
       {componentType === 'toAddress' && toAddress !== toAddressOrUrl && !addressError &&
         <AddressConfirmationText>{reduceAddress(toAddress ?? '')}</AddressConfirmationText>
       }
